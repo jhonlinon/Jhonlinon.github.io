@@ -1,121 +1,236 @@
-  * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 
-    body {
-      background-color: lightgray;
-      margin: 0;
-      padding: 0;
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-    }
+/* General Reset */
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
 
-    .background-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-    }
+html {
+    overflow-x: hidden;
+}
 
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      position: relative;
-    }
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(to right, rgb(220, 210, 104), rgb(254,215,173));
+}
 
-    .form-container {
-      background-color: white;
-      padding: 50px;
-      border-radius: 5px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      width: 400px;
-      text-align: center;
-    }
+/* Navigation */
+nav {
+    width: 100%;
+    height: 10vh;
+    position: sticky;
+    top: 0;
+    background-color: #f3d085;
+    z-index: 10;
+}
 
-    .form-title {
-      margin-bottom: 35px;
-      text-align: center;
-    }
+.nav-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 
-    .logo {
-      max-width: 300px;
-      height: fit-content; 
-    }
+.logo {
+    color: black;
+    font-size: 2rem;
+    font-weight: bolder;
+}
 
-    .input-group {
-      margin-bottom: 20px;
-    }
+.logo span {
+    color: rgb(109,67, 0);
+    text-shadow: 0 0 10px rgb(109,67, 0);
+}
 
-    .input-group label {
-      display: block;
-      font-size: 14px;
-      color: black;
-      margin-bottom: 5px;
-    }
+.hamburg, .cancel {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: black;
+    font-size: 2rem;
+    display: none;
+}
 
-    .input-group input {
-      width: 100%;
-      padding: 13px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      outline: none;
-    }
+.nav-container .links {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
 
-    .input-group input:focus {
-      border-color: black;
-    }
+.nav-container .links a {
+    position: relative;
+    font-size: 1.2rem;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s linear;
+}
 
-    .btn {
-      width: 100%;
-      padding: 10px;
-      background-color: rgb(24, 60, 24);
-      color: #e9ff78;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
+.nav-container .links a::before {
+    position: absolute;
+    content: "";
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: rgb(109,67, 0);
+    transition: 0.2s linear;
+}
 
-    .btn:hover {
-      background-color: rgb(146, 146, 72);
-    }
+.nav-container .links a:hover::before {
+    width: 100%;
+}
 
-    .form-footer {
-      text-align: center;
-      font-size: 17px;
-      margin-top: 15px;
-    }
+.nav-container .links a:hover {
+    color: rgb(109,67, 0);
+}
 
-    .form-footer a {
-      color: #abbd52;
-      text-decoration: underline;
-    }
+.nav-container .contact-btn {
+    background-color: transparent;
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: 2px solid rgb(109,67, 0);
+    transition: 0.2s linear;
+}
 
-    #signup-form {
-      display: none;
-    }
+.nav-container .contact-btn a {
+    color: white;
+    transition: 0.3s linear;
+}
 
-    body.show-signup #login-form {
-      display: none;
-    }
+.nav-container .contact-btn:hover, .nav-container .contact-btn:hover a {
+    background-color: rgb(109,67, 0);
+    color: white;
+}
 
-    body.show-signup #signup-form {
-      display: block;
-    }
+/* Section Styles */
+section {
+    width: 100%;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 90px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
 
-    body.show-login #signup-form {
-      display: none;
-    }
+.section-container {
+    display: none;
+    text-align: center;
+    margin: 20px 0;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 10;
+}
 
-    body.show-login #login-form {
-      display: block;
+.content {
+    color: black;
+    width: 50%;
+    margin-top: 0px;
+    text-align: left;
+}
+
+.content h1 {
+    font-size: clamp(1rem, 2rem + 5vw, 3rem);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards;
+}
+
+.content h1 span {
+    color: rgb(109,67, 0);
+    text-shadow: 0 0 10px rgb(109,67, 0);
+}
+
+.content p {
+    font-size: clamp(0.4rem, 0.2rem + 9vw, 1rem);
+    margin: 10px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards;
+    animation-delay: 0.5s;
+}
+
+/* Main Container for Home */
+.main-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 90vh;
+    gap: 50px;
+}
+
+.main-container .image {
+    width: 400px;
+    height: 500px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 100px;
+}
+
+.main-container .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Show active section */
+.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Section images */
+.section-container img {
+    width: 400px;
+    height: 500px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 50px;
+}
+
+/* Animation for fade-in text */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
     }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Social Icons */
+.social_icon a {
+    font-size: 2.5rem;
+    margin-right: 30px;
+    transition: 0.3s ease;
+}
+
+.social_icon a:hover {
+    color: rgb(109,67,0);
+    padding: 5px 10px;
+    border-radius: 25px;
+    background-color: rgb(186, 142, 70);
+}
+
+/* Media Queries for smaller screens */
+@media (max-width:884px) {
+    .content {
+        width: 80%;
+    }
+    .main-container {
+        flex-direction: column;
+        height: auto;
+    }
+}
